@@ -34,7 +34,7 @@ const tabs = [
     headTitle: "Accounts - UM",
   },
   {
-    id: "admin_assign",
+    id: "dash_users",
     icon: <DataBaseIcon />,
     label: "Users",
     roles: ["admin"],
@@ -66,7 +66,7 @@ const tabs = [
 const tabComponents = {
   home: (props) => <Home {...props} />,
   accounts: (props) => <AccountsList {...props} />,
-  admin_assign: (props) => <AdminAssign {...props} />,
+  dash_users: (props) => <AdminAssign {...props} />,
   support_tickets: (props) => <SupportTickets {...props} />,
   settings: (props) => <Settings {...props} />,
   generateAccount: (props) => <GenerateAccount {...props} />,
