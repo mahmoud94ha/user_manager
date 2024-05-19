@@ -8,7 +8,7 @@ export const backupDatabase = async () => {
         let dbBpath: string;
 
         if (system === 'linux') {
-            dbBpath = '/home/ealogger/database.sql';
+            dbBpath = '/home/user_manager/database.sql';
         } else if (system === 'win32') {
             dbBpath = 'C:\\Users\\ADMINI~1\\DOCUME~1\\database.sql';
         } else {

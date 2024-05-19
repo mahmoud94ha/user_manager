@@ -228,7 +228,7 @@ function Settings() {
               </div>
             </div>
             <div className="col colTimeout">
-              <p>Timeout (hours) :</p>
+              <p>Timeout (Minutes) :</p>
               <input
                 type="number"
                 value={backupTimeout}
