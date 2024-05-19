@@ -110,7 +110,7 @@ export async function middleware(request: NextRequest) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ key: "2b83048e6baf5ca30bceda8362f9b6f6e82c3c63b5a17d6b45f1c2e63f5a9e70d" })
+    body: JSON.stringify({ key: env.MIDDLEWARE_SECRET })
   });
   const banned_ips_req_json = await banned_ips_req.json();
   const bannedIps: string[] = banned_ips_req_json.bannedIps;
