@@ -41,6 +41,11 @@ export const cancelSummary = (): void => {
     }
 };
 
+const getEmail = async () => {
+    const email = await prisma.settings.findFirst({});
+    return email.notificationEmail;
+}
+
 const sendSummary = async (): Promise<void> => {
     try {
         const now = new Date();
@@ -120,7 +125,7 @@ const sendSummary = async (): Promise<void> => {
 ✔️ Verified: ${last24HoursVerifiedAccounts}\n
 ❌ None verified: ${last24HoursNotVerAccounts}\n
 ✅ Banned Customers: ${last24HoursBannedAccounts}\n`;
-        await SendMail("24 hours UM Summary", summaryMessage, "usermanager@user-management.com");
+        await SendMail("24 hours UM Summary", summaryMessage, await getEmail());
         console.log(summaryMessage);
     } catch (error) {
         console.error('Error sending summary:', error);

@@ -1,13 +1,7 @@
 import { Resend } from 'resend';
-import prisma from "@lib/authPrisma";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const domain = process.env.URL;
-
-const getEmail = async () => {
-  const email = await prisma.settings.findFirst({});
-  return email.notificationEmail;
-}
 
 export const sendPasswordResetEmail = async (
   email: string,
@@ -17,7 +11,7 @@ export const sendPasswordResetEmail = async (
   console.log(resetLink);
 
   await resend.emails.send({
-    from: await getEmail(),
+    from: "usermanager@user-management.com",
     to: email,
     subject: "Reset your password",
     html: `<p>Click <a href="${resetLink}">here</a> to reset password.</p>`
@@ -32,7 +26,7 @@ export const sendVerificationEmail = async (
   console.log(confirmLink);
 
   await resend.emails.send({
-    from: await getEmail(),
+    from: "usermanager@user-management.com",
     to: email,
     subject: "Confirm your email",
     html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`
@@ -45,7 +39,7 @@ export const sendSupportTicket = async (
   email: string
 ) => {
   await resend.emails.send({
-    from: await getEmail(),
+    from: "usermanager@user-management.com",
     to: email,
     subject: "New Support ticket: " + subject,
     html: message
@@ -58,10 +52,9 @@ export const SendMail = async (
   email: string
 ) => {
   await resend.emails.send({
-    from: await getEmail(),
+    from: "usermanager@user-management.com",
     to: email,
     subject: "New Support ticket: " + subject,
     html: message
   });
-  console.log(await getEmail());
 };
