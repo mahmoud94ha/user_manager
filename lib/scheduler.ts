@@ -134,7 +134,7 @@ const sendSummary = async (): Promise<void> => {
           <strong>🔑 Created:</strong> ${last24HoursAccounts}<br>
           <strong>✔️ Verified:</strong> ${last24HoursVerifiedAccounts}<br>
           <strong>❌ None verified:</strong> ${last24HoursNotVerAccounts}<br>
-          <strong>✅ Banned Customers:</strong> ${last24HoursBannedAccounts}
+          <strong>🚫 Banned Customers:</strong> ${last24HoursBannedAccounts}
         </p>
       </div>
     </body>

@@ -202,8 +202,12 @@ function Settings() {
               <input
                 type="text"
                 value={notificationEmail}
-                disabled={loading}
-                placeholder="Enter you email here"
+                //disabled={loading}
+                placeholder={
+                  loading
+                    ? "Loading..."
+                    : "Enter you email here"
+                }
                 onChange={(e) => setnotificationEmail(e.target.value)}
               />
             </div>
