@@ -83,7 +83,7 @@ const HomeComponent = ({ session }) => {
   ];
 
   const usersData = [
-    { name: "Total", value: usersCount },
+    { name: "Total", value: ticketsCount },
     { name: "Replied", value: repliedTicketsCount },
     { name: "Not Replied", value: nonRepliedTicketsCount },
   ];
