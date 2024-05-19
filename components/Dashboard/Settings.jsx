@@ -195,7 +195,7 @@ function Settings() {
           </div>
         </div>
         <div className="col-3">
-        <h2 style={{ marginBottom: "5px", color: "#51459E" }}>Notification Email</h2>
+          <h2 style={{ marginBottom: "5px", color: "#51459E" }}>Notification Email</h2>
           <div className="fl_row">
             <div className="col">
               <p>Notification email :</p>
@@ -203,11 +203,7 @@ function Settings() {
                 type="text"
                 value={notificationEmail}
                 disabled={loading}
-                placeholder={
-                  loading
-                    ? "Loading..."
-                    : "Enter you email here"
-                }
+                placeholder="Enter you email here"
                 onChange={(e) => setnotificationEmail(e.target.value)}
               />
             </div>

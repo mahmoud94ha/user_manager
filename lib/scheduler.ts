@@ -117,14 +117,30 @@ const sendSummary = async (): Promise<void> => {
             return `    - ${pageName.charAt(0).toUpperCase() + pageName.slice(1).replace("-", " ")}: ${viewerCount}`;
         });
 
-        const summaryMessage = `📋 User Manager 24 hours Summary 📋\n
-👀 Total Visitors: ${totalViewers}\n\n
-📊 Pages visited counters:\n${formattedPageCounts ? formattedPageCounts.join('\n') : "No visitors today"}\n\n
-📈 Customer stats (last 24 hours):\n
-🔑 Created: ${last24HoursAccounts}\n
-✔️ Verified: ${last24HoursVerifiedAccounts}\n
-❌ None verified: ${last24HoursNotVerAccounts}\n
-✅ Banned Customers: ${last24HoursBannedAccounts}\n`;
+        const summaryMessage = `
+  <html>
+    <body>
+      <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+        <h2 style="color: #4f499b;">📋 User Manager 24 hours Summary 📋</h2>
+        <p style="font-size: 16px;">
+          <strong>👀 Total Visitors:</strong> ${totalViewers}
+        </p>
+        <h3 style="color: #4f499b;">📊 Pages visited counters:</h3>
+        <p style="font-size: 16px;">
+          ${formattedPageCounts ? formattedPageCounts.join('<br>') : "No visitors today"}
+        </p>
+        <h3 style="color: #4f499b;">📈 Customer stats (last 24 hours):</h3>
+        <p style="font-size: 16px;">
+          <strong>🔑 Created:</strong> ${last24HoursAccounts}<br>
+          <strong>✔️ Verified:</strong> ${last24HoursVerifiedAccounts}<br>
+          <strong>❌ None verified:</strong> ${last24HoursNotVerAccounts}<br>
+          <strong>✅ Banned Customers:</strong> ${last24HoursBannedAccounts}
+        </p>
+      </div>
+    </body>
+  </html>
+`;
+
         await SendMail("24 hours UM Summary", summaryMessage, await getEmail());
         console.log(summaryMessage);
     } catch (error) {
