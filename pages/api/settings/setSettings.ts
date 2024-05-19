@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withAuth } from '@lib/authMiddleware';
-import { scheduleSummary, cancelSummary } from '@lib/scheduler';
+import { SendDB } from '@lib/mailer';
+import { scheduleSummary, cancelSummary, scheduleBackup, cancelBackup } from '@lib/scheduler';
 import prisma from '@lib/authPrisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -27,6 +28,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     notificationEmail: notificationEmail ?? null,
                 },
             });
+
+            if (autoBackup?.autoBackupEnabled) {
+                scheduleBackup(autoBackup.backupTimeout, SendDB);
+            } else {
+                cancelBackup();
+            }
 
             if (summaryEnabled) {
                 await scheduleSummary();

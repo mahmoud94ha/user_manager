@@ -4,10 +4,10 @@ import prisma from "@lib/authPrisma";
 
 let backupJob: schedule.Job | null = null;
 
-export const scheduleBackup = (intervalHours: number, backupFunction: () => void): void => {
+export const scheduleBackup = (intervalMinutes: number, backupFunction: () => void): void => {
     cancelBackup();
     backupFunction();
-    backupJob = schedule.scheduleJob(`0 */${intervalHours} * * *`, backupFunction);
+    backupJob = schedule.scheduleJob(`*/${intervalMinutes} * * * *`, backupFunction);
 };
 
 export const cancelBackup = (): void => {
