@@ -7,8 +7,8 @@ export default function useClientIP() {
     useEffect(() => {
         const fetchIP = async () => {
             try {
-                const response = await axios.get('https://api64.ipify.org?format=json');
-                setClientIP(response.data.ip);
+                const response = await axios.get('https://httpbin.org/ip');
+                setClientIP(response.data.origin);
             } catch (error) {
                 console.error('Error fetching IP:', error);
                 setClientIP(null);
