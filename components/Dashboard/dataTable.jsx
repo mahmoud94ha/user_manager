@@ -717,6 +717,14 @@ function dataTable({
 
   return (
     <div id="AccountsTable">
+      <Button
+        disabled={true}
+        variant="contained"
+        className="doneButton"
+        style={{ display: 'none' }}
+      >
+        THIS IS TO MAKE NEXT COMPILE THIS UI ELEMENT, ANNOYING BUG
+      </Button>
       {isUserAdmin && currentPage === "accounts" && (
         <Popup
           trigger={null}
