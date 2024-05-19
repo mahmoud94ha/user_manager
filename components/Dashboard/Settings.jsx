@@ -7,7 +7,7 @@ function Settings() {
   const [downLink, setDownLink] = useState("");
   const [autoBackupEnabled, setAutoBackupEnabled] = useState(false);
   const [summaryEnabled, setSummaryEnabled] = useState(false);
-  const [notificationEmail, setnotificationEmail] = useState(false);
+  const [notificationEmail, setnotificationEmail] = useState(null);
   const [backupTimeout, setBackupTimeout] = useState(0);
   const [loading, setLoading] = useState(false);
   const [savingInProgress, setsavingInProgress] = useState(false);
@@ -195,14 +195,14 @@ function Settings() {
           </div>
         </div>
         <div className="col-3">
-          <h2 style={{ marginBottom: "5px", color: "#51459E" }}>Notification Email</h2>
+        <h2 style={{ marginBottom: "5px", color: "#51459E" }}>Notification Email</h2>
           <div className="fl_row">
             <div className="col">
               <p>Notification email :</p>
               <input
                 type="text"
                 value={notificationEmail}
-                //disabled={loading}
+                disabled={loading}
                 placeholder={
                   loading
                     ? "Loading..."
