@@ -6,8 +6,8 @@ import { setup } from "@lib/CustomCSRF";
 
 // import LoadingAnimation from "../components/LoadingAnimation/animation";
 
-async function SignInPage() {
-  const clientIP = await useClientIP();
+function SignInPage() {
+  const clientIP = useClientIP();
   const [currentPage, setCurrentPage] = useState("Login");
   // const [isLoading, setIsLoading] = useState(false);
 

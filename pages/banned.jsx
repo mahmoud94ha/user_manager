@@ -2,23 +2,25 @@ import React, { useState, useEffect } from "react";
 import useClientIP from '@lib/useClientIP';
 import axios from "axios";
 
-const BannedPage = async () => {
-    const clientIP = await useClientIP();
+const BannedPage = () => {
+    const clientIP = useClientIP();
     const [render, setRender] = useState(false);
     useEffect(async () => {
-        try {
-            const response = await axios.post("/api/user/banCheck", { re_p: clientIP });
-            if (response.status === 200) {
-                window.location.href = "/";
+        if (clientIP) {
+            try {
+                const response = await axios.post("/api/user/banCheck", { re_p: clientIP });
+                if (response.status === 200) {
+                    window.location.href = "/";
+                }
+            } catch (error) {
+                if (error.response.status === 403) {
+                    setRender(true);
+                }
+                console.error();
             }
-        } catch (error) {
-            if (error.response.status === 403) {
-                setRender(true);
-            }
-            console.error();
         }
     }
-        , []);
+        , [clientIP]);
     if (render) {
         return (
             <div className="banned-container">
