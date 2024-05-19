@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const user: any = await withAuth(req, res);
 
-            const { autoBackup, summaryEnabled, userNotification } = req.body;
+            const { autoBackup, summaryEnabled, userNotification, notificationEmail } = req.body;
 
             const updatedSettings = await prisma.settings.upsert({
                 where: { id: 1 },
@@ -17,12 +17,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     backupTimeout: autoBackup?.backupTimeout ?? null,
                     summaryEnabled: summaryEnabled ?? false,
                     userNotificationEnabled: userNotification?.userNotificationEnabled ?? false,
+                    notificationEmail: notificationEmail ?? null,
                 },
                 create: {
                     autoBackupEnabled: autoBackup?.autoBackupEnabled ?? false,
                     backupTimeout: autoBackup?.backupTimeout ?? null,
                     summaryEnabled: summaryEnabled ?? false,
                     userNotificationEnabled: userNotification?.userNotificationEnabled ?? false,
+                    notificationEmail: notificationEmail ?? null,
                 },
             });
 

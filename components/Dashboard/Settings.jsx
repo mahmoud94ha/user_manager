@@ -7,6 +7,7 @@ function Settings() {
   const [downLink, setDownLink] = useState("");
   const [autoBackupEnabled, setAutoBackupEnabled] = useState(false);
   const [summaryEnabled, setSummaryEnabled] = useState(false);
+  const [notificationEmail, setnotificationEmail] = useState(false);
   const [backupTimeout, setBackupTimeout] = useState(0);
   const [loading, setLoading] = useState(false);
   const [savingInProgress, setsavingInProgress] = useState(false);
@@ -22,10 +23,11 @@ function Settings() {
         params: { setting: "all" },
       });
 
-      const { autoBackupEnabled, backupTimeout, summaryEnabled, userNotificationEnabled } =
+      const { autoBackupEnabled, backupTimeout, summaryEnabled, userNotificationEnabled, notificationEmail } =
         response.data;
       setBackupTimeout(backupTimeout);
       setAutoBackupEnabled(autoBackupEnabled);
+      setnotificationEmail(notificationEmail);
       setSummaryEnabled(summaryEnabled || false);
     } catch (error) {
       console.error("Error fetching settings:", error);
@@ -143,6 +145,7 @@ function Settings() {
           backupTimeout,
         },
         summaryEnabled: summaryEnabled,
+        notificationEmail: notificationEmail,
       });
 
       if (response.status === 200) {
@@ -191,10 +194,24 @@ function Settings() {
             </button>
           </div>
         </div>
-
-        <div className="col-2">
-        </div>
         <div className="col-3">
+        <h2 style={{ marginBottom: "5px", color: "#51459E" }}>Notification Email</h2>
+          <div className="fl_row">
+            <div className="col">
+              <p>Notification email :</p>
+              <input
+                type="text"
+                value={notificationEmail}
+                disabled={loading}
+                placeholder={
+                  loading
+                    ? "Loading..."
+                    : "Enter you email here"
+                }
+                onChange={(e) => setnotificationEmail(e.target.value)}
+              />
+            </div>
+          </div>
           <h2 style={{ marginBottom: "-20px", color: "#51459E" }}>
             Auto Backup
           </h2>

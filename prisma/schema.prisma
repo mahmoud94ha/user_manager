@@ -113,4 +113,5 @@ model Settings {
   backupTimeout      Int?
   summaryEnabled     Boolean  @default(false)
   userNotificationEnabled Boolean @default(false)
+  notificationEmail String  @default("example@example.com")
 }
