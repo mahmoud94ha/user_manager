@@ -1,0 +1,226 @@
+.fade-in {
+  animation: slidefromleft 0.5s ease-in-out;
+}
+
+.fade-in {
+  animation: slidefromleft 0.5s ease-in-out;
+}
+.menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+#Dashboard {
+  @font-face {
+    font-family: "Electronic Arts Text";
+    font-weight: normal;
+    src: url("../global/fonts/artxtextregular.woff2")
+      format("woff2");
+  }
+
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  * {
+    font-family: "Poppins", sans-serif !important;
+  }
+
+  & .ShapeHeader {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  & .adminMenu {
+    position: absolute;
+    justify-content: flex-start;
+    border-radius: 8px;
+    width: 133px;
+    height: auto;
+    top: 45px;
+    left: 0%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    user-select: none !important;
+
+    & p {
+      font-family: "Electronic Arts Text" !important;
+      font-size: 16px !important;
+      margin-left: -10px !important;
+      padding-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+
+    & .signOut-dash {
+      transition: all 0.3s ease;
+      padding-left: 10px !important;
+      margin-left: 10px !important;
+      margin-bottom: -18px !important;
+      width: 20px !important;
+      height: 20px !important;
+      margin-right: -7px !important;
+    }
+
+    * {
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  & .dashboard_nav {
+    width: 15%;
+    background-color: white;
+    padding: 20px;
+    gap: 40px;
+    border-right: 1px solid #80808029;
+    user-select: none !important;
+
+    & .navItem {
+      cursor: pointer;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+
+      & p {
+        margin-left: 10px;
+      }
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+
+    & .navHeader {
+      gap: 10px;
+
+      & svg {
+        width: 64px !important;
+        aspect-ratio: 1/1;
+        fill: red !important;
+      }
+
+      & p {
+        font-size: 24px;
+        color: $dark;
+        font-weight: 900;
+      }
+    }
+
+    & .navList {
+      gap: 30px;
+      padding-left: 10px;
+
+      & div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        cursor: pointer;
+        opacity: 0.4;
+      }
+
+      & svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      & .active_tab {
+        opacity: 1 !important;
+
+        &::before {
+          content: url("./active.svg");
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          left: -30px;
+          top: -15px;
+          animation: slidefromleft 0.3s ease-in-out;
+        }
+
+        & p {
+          color: $dark !important;
+        }
+      }
+    }
+  }
+
+  & .dashboard_data {
+    width: 85%;
+    background-color: white;
+    padding: 30px;
+
+    & .data_header {
+      & p {
+        font-size: 27px;
+        color: $dark;
+      }
+
+      & .adminAccount {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 1.85185px 3.14815px 0px rgba(41, 72, 152, 0.01),
+          0px 8.14815px 6.51852px 0px rgba(41, 72, 152, 0.02),
+          0px 20px 13px 0px rgba(41, 72, 152, 0.03),
+          0px 38.51852px 25.48148px 0px rgba(41, 72, 152, 0.03),
+          0px 64.81481px 46.85185px 0px rgba(41, 72, 152, 0.04),
+          0px 100px 80px 0px rgba(41, 72, 152, 0.05);
+        border-radius: 10px;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        & svg {
+          padding: 15px;
+          width: 48px;
+          height: 48px;
+        }
+
+        // &:hover {
+        //   background-color: $dark;
+
+        //   & svg {
+        //     filter: invert(1);
+        //   }
+        // }
+      }
+    }
+
+    & .CurrentDataPreview {
+      margin-top: 40px;
+      box-shadow: 0px 8px 32px 0px rgba(51, 38, 174, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+      padding-bottom: 55px;
+    }
+  }
+}

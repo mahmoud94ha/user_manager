@@ -1,0 +1,116 @@
+generator authClient {
+  provider = "prisma-client-js"
+  output   = "./generated/auth-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Visitor {
+  id            Int       @id @default(autoincrement())
+  ipAddress     String
+  lastPage      String
+  dateVisited   DateTime  @default(now())
+
+  @@unique([ipAddress, lastPage])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String              @id @default(cuid())
+  name          String?
+  email         String?             @unique
+  password      String
+  plainPassword String?
+  emailVerified DateTime?
+  image         String?
+  role          String?
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime?           @default(now())
+}
+
+model customers {
+  id          Int       @id @default(autoincrement())
+  username    String
+  email       String    @unique
+  password    String
+  ip          String?
+  location    String?
+  verified    Boolean?
+  online      Boolean?
+  banned      Boolean   @default(false)
+  banMessage  String?
+  by_user     String?
+  createdAt   DateTime  @default(now())
+  verifiedAt  DateTime?
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model BannedIP {
+  id          Int       @id @default(autoincrement())
+  ipAddress   String    @unique
+}
+
+model SupportRequest {
+  id           Int      @id @default(autoincrement())
+  accountEmail String   @unique
+  subject      String
+  message      String
+  replyMessage String?
+  repliedByUser String?
+  createdAt    DateTime @default(now())
+}
+
+model Settings {
+  id                 Int      @id @default(autoincrement())
+  autoBackupEnabled  Boolean  @default(false)
+  backupTimeout      Int?
+  summaryEnabled     Boolean  @default(false)
+  userNotificationEnabled Boolean @default(false)
+}

@@ -1,0 +1,164 @@
+.settings {
+  @font-face {
+    font-family: "Electronic Arts Text";
+    font-weight: normal;
+    src: url("../global/fonts/artxtextregular.woff2")
+      format("woff2");
+  }
+
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px; // for the scrollbar
+  gap: 70px;
+  & button {
+    transform: unset !important;
+    width: 100% !important;
+    transition: all 0.3s;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  & input,
+  .col {
+    width: 100%;
+  }
+
+  & .col {
+    position: relative;
+
+    & p {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  & input {
+    height: 50px;
+    border: 2px solid $dark;
+    border-radius: 10px;
+    text-indent: 180px;
+    font-size: 15px;
+  }
+
+  & .btn {
+    background-color: $dark;
+    color: $white;
+    height: 50px;
+  }
+
+  & .col-1 {
+    display: flex;
+    flex-direction: column;
+
+    & input {
+      margin: 20px 0;
+    }
+
+    & .fl_row {
+      width: 100%;
+      flex: 1;
+      flex-direction: row;
+      gap: 20px;
+      & .btn {
+        flex: 1;
+      }
+    }
+  }
+
+  & .col-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  & .col-3 {
+    & input {
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 20px;
+
+    & .colCheckbox {
+      width: 8%;
+    }
+
+    @media (max-width: 1905px) {
+      .colCheckbox {
+        width: 13%;
+      }
+    }
+
+    @media (max-width: 1400px) {
+      .colCheckbox {
+        width: 15%;
+      }
+    }
+
+    & .colTimeout {
+      width: 20%;
+    }
+
+    & #checkbox {
+      all: unset;
+      cursor: pointer;
+      user-select: none !important;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-left: 10px;
+      margin-right: 5px;
+
+      & span {
+        all: unset;
+        font-family: Verdana !important;
+        position: relative;
+        margin-right: 10px;
+        bottom: 10px;
+      }
+
+      & input[type="checkbox"] {
+        text-indent: unset;
+        cursor: pointer;
+        appearance: none;
+        top: 13px;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #62626f;
+        border-radius: 4px;
+        position: relative;
+        transition: background-color 0.3s, box-shadow 0.3s;
+
+        &::before {
+          font-family: "origin";
+          content: "\e624";
+          font-size: 31px;
+          line-height: 25px;
+          color: #fff;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        &:checked {
+          background-color: #264dac;
+          box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3),
+            -2px -2px 5px rgba(255, 255, 255, 0.3);
+          border: 2px solid #264dac;
+
+          &::before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

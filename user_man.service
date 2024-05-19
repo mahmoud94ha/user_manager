@@ -1,0 +1,14 @@
+[Unit]
+Description=Next.js user_manager
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Restart=always
+WorkingDirectory=/home/user_manager
+ExecStart=/bin/bash -c '/usr/bin/npm start >> user_managment.log 2>&1'
+Environment=DISPLAY=:1
+
+[Install]
+WantedBy=multi-user.target

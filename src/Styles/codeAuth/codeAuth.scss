@@ -1,0 +1,225 @@
+.codeAuth {
+  @font-face {
+    font-family: "Electronic Arts Text";
+    font-weight: normal;
+    src: url("../global/fonts/artxtextregular.woff2")
+      format("woff2");
+  }
+
+  padding-top: 111px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: 400px;
+  }
+
+  & .enter-code-warning {
+    & strong {
+      font-family: "Electronic Arts Text";
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      line-height: 1.618;
+      font-weight: normal;
+    }
+  }
+
+  & input {
+    font-family: $secondary-font;
+    font-size: 18px;
+    background-color: #141723;
+    border: 1px solid #686874;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  input:hover:not(:focus):not([type="checkbox"]) {
+    border-color: #908e97;
+  }
+
+  input:focus {
+    border-color: #fdfdfd !important;
+    box-shadow: 0 0 7px rgba(255, 255, 255, 0.3);
+  }
+
+  & .empty-input {
+    color: #908e97;
+  }
+
+  & .elements {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+
+    & .link-in-message {
+      font-family: "Electronic Arts Text";
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      line-height: 1.618;
+    }
+
+    .resend-link {
+      font-family: "Electronic Arts Text";
+      font-size: 16.2px;
+      letter-spacing: 0.03em;
+      line-height: 1.618;
+      margin-top: -15px;
+    }
+
+    & .ea-font-normal {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      font-size: 15.6px !important;
+      color: white;
+      font-weight: 200;
+      font-family: "Electronic Arts Text" !important;
+      margin: 0;
+      padding: 0;
+      display: inline;
+    }
+
+    & .send_btn {
+      margin: 0 auto;
+      align-self: center;
+      margin-left: 8.5px;
+    }
+
+    & p {
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      margin-top: -25px;
+      padding: 30px;
+      gap: 30px;
+
+      & p {
+        padding: 5px;
+      }
+
+      & .link-in-message,
+      .resend-link {
+        font-size: 16px;
+      }
+
+      & .send_btn {
+        margin-left: 4.5px;
+      }
+    }
+  }
+
+  & .back {
+    width: 80px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    background-color: #343647;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 8px;
+    font-size: 12px;
+    border: 2px solid #343647;
+    cursor: pointer;
+
+    @media (max-width: 860px) {
+      margin-left: 20px;
+    }
+
+    & span {
+      position: relative;
+      right: 4px;
+    }
+
+    & .injected-svg {
+      width: 17px;
+      height: auto;
+      margin-right: 5px;
+    }
+
+    &:hover {
+      transition-duration: 0.18s;
+      transform: scale(0.96);
+    }
+
+    &.active {
+      border-color: white;
+      box-shadow: 0 0 15px rgb(255, 255, 255);
+    }
+  }
+  & .AuthCode {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  & .error-text {
+    position: relative;
+    bottom: 4px;
+    -webkit-animation: slidefromleft 0.4s
+      cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: slidefromleft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: $secondary-font;
+    font-size: 14px;
+    line-height: 1.129;
+    color: #f94747;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.03em;
+    text-align: left;
+  }
+
+  & .invalid-input {
+    border: 1px solid #f94747 !important;
+  }
+  & .resend-div-message {
+    padding: 0 48px 0 48px;
+  }
+  & .resend-div.resend-div-active {
+    z-index: 1000;
+    padding: 16px 0;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.6s cubic-bezier(0.03, 1, 0.2, 1);
+  }
+  &.resend-div {
+    background-color: #22313c;
+    color: #fff;
+    width: 100%;
+    transition: all 0.6s cubic-bezier(0.03, 1, 0.2, 1);
+    text-align: center;
+    overflow: hidden;
+  }
+  &.resend-div {
+    position: static;
+  }
+  & .resend-div.resend-div-active {
+    z-index: 1000;
+    padding: 16px 0 16px 0;
+    height: initial;
+    transition: all 0.6s cubic-bezier(0.03, 1, 0.2, 1);
+  }
+  .svg-icon {
+    position: relative;
+    top: 2.5px;
+    right: 2px;
+  }
+  &.resend-div-passive.svg-icon {
+    color: #2ac4f5;
+    font-size: 24px;
+    padding-right: 0;
+  }
+  & .resend-div-passive {
+    background-color: #171a29 !important;
+    color: #fff !important;
+  }
+}

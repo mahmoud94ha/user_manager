@@ -1,0 +1,95 @@
+.popup-content {
+  * {
+    font-family: "Poppins", sans-serif !important;
+  }
+
+  margin: auto;
+  background: rgb(255, 255, 255);
+  width: 50%;
+  padding: 40px;
+  border-radius: 20px;
+  position: relative;
+
+  & button {
+    height: 40px;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+    text-transform: unset;
+
+    &:hover {
+      transform: translateX(-50%) scale(0.93) !important;
+    }
+  }
+
+  & .btn-add,
+  & .btn-remove {
+    background-color: green;
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+  }
+
+  & .btn-remove {
+    background-color: $red;
+  }
+
+  animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.ConfirmationPopup {
+  * {
+    font-family: "Poppins", sans-serif !important;
+  }
+
+  & button {
+    flex: 1;
+    border-radius: unset;
+    &:hover {
+      transform: translateX(0%) scale(0.93) !important;
+    }
+  }
+
+  & div {
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  & .cancel {
+    background-color: grey;
+  }
+
+  & span {
+    color: $primary;
+    font-weight: 900 !important;
+  }
+
+  & .ban {
+    background-color: $red;
+    flex: 1;
+    border-radius: unset;
+  }
+}
+
+.popup-arrow {
+  color: rgb(255, 255, 255);
+}
+
+[role="tooltip"].popup-content {
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-popup="tooltip"].popup-overlay {
+  background: transparent;
+}

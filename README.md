@@ -1,2 +1,2 @@
-# user_manager
-User managment Dashboard project (new repo)
+# User Manager
+## User managment Dashboard project (new repo)

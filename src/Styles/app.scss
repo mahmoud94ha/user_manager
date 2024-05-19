@@ -1,0 +1,31 @@
+@import "./global/colors.scss";
+@import "./global/rules.scss";
+@import "./global/typo.scss";
+@import "./global/toastify.scss";
+@import "./login/login.scss";
+@import "./codeAuth/codeAuth.scss";
+@import "./dashboard/dashboard.scss";
+@import "./dashboard/accountsListing.scss";
+@import "./dashboard/AuthLogin.scss";
+@import "./dashboard/AdminAssignTable.scss";
+@import "./dashboard/UserPopup.scss";
+//@import "./home_page.scss";
+@import "./dashboard/settings.scss";
+@import "./dashboard/generateAccount.scss";
+
+.banned-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.banned-h1 {
+  color: rgb(164, 154, 154);
+  font-size: 3rem;
+  text-align: center;
+  a {
+    font-size: 2rem;
+    text-align: center;
+  }
+}

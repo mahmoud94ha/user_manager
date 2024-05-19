@@ -1,0 +1,365 @@
+.GenerateAccount {
+  & h1 {
+    margin-bottom: 40px;
+  }
+  & .generator {
+    position: relative;
+
+    & button {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 150px;
+      height: 95%;
+      border: unset;
+      background-color: $dark;
+      color: $white;
+      transition: all 0.3s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    & #checkbox {
+      all: unset;
+      cursor: pointer;
+      user-select: none !important;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-left: 10px;
+      margin-right: 5px;
+
+      & span {
+        all: unset;
+        font-family: Verdana !important;
+        margin-right: 5px;
+      }
+
+      & input[type="checkbox"] {
+        cursor: pointer;
+        appearance: none;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #62626f;
+        border-radius: 4px;
+        position: relative;
+        transition: background-color 0.3s, box-shadow 0.3s;
+
+        &::before {
+          font-family: "origin";
+          content: "\e624";
+          font-size: 31px;
+          line-height: 25px;
+          color: #fff;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        &:checked {
+          background-color: #264dac;
+          box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3),
+            -2px -2px 5px rgba(255, 255, 255, 0.3);
+          border: 2px solid #264dac;
+
+          &::before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    & #nameInput {
+      height: 50px;
+      border: 2px solid $dark;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      text-indent: 160px;
+      width: 350px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    & #generatedAccount {
+      height: 50px;
+      border: 2px solid $dark;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      text-indent: 10px;
+      width: 600px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    & .viewBtn {
+      position: relative !important;
+      top: 24px !important;
+      position: unset;
+      margin-left: 10px;
+      height: 50px;
+      border: unset;
+      background-color: $dark;
+      color: $white;
+      transition: all 0.3s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+#generateAccountTable {
+  @font-face {
+    font-family: "Electronic Arts Text";
+    font-weight: normal;
+    src: url("../global/fonts/artxtextregular.woff2")
+      format("woff2");
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 0;
+
+  & .icon-sort {
+    font-size: 12px;
+    transition: transform 0.3s, margin-top 0.3s;
+    margin-left: 5px;
+    margin-top: -4px;
+  }
+
+  & .icon-sort-asc::before {
+    transform-origin: center;
+    content: "\2191";
+    transition: transform 0.3s, margin-top 0.3s;
+  }
+
+  & .icon-sort-desc::before {
+    transform-origin: center;
+    content: "\2191";
+    transition: transform 0.3s, margin-top 0.3s;
+  }
+
+  & .icon-sort-asc::before,
+  & .icon-sort-desc::before {
+    display: inline-block;
+    transform: rotate(0deg) translateY(0);
+  }
+
+  & .icon-sort-desc::before {
+    transform: rotate(180deg) translateY(-3px);
+  }
+
+  & .tools-dropdown-enter {
+    opacity: 0.01;
+    transform: translateY(-10px);
+  }
+
+  & .tools-dropdown-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-in, transform 300ms;
+  }
+
+  & .tools-dropdown-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  & .tools-dropdown-exit-active {
+    opacity: 0.01;
+    transform: translateY(-10px);
+    transition: opacity 300ms ease-in, transform 300ms;
+  }
+
+  & .ToolsBar {
+    height: 48px;
+    gap: 15px;
+
+    & svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    & .SearchTable {
+      border-radius: 7px;
+      background: #f5f9fd;
+      padding: 15px;
+      flex: 1;
+
+      & .search__ {
+        width: -webkit-fill-available;
+        gap: 20px;
+
+        & p {
+        }
+
+        & input {
+          color: #9a9a9a;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          border: 0 !important;
+          background-color: transparent !important;
+          flex: 1;
+          outline: unset !important;
+        }
+      }
+
+      & .SearchOptions {
+        cursor: pointer;
+
+        & svg {
+          width: 33px !important;
+          height: 32px !important;
+        }
+      }
+    }
+  }
+
+  & .Table {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    & .TableHeader {
+      user-select: none;
+      gap: 24px;
+      border-bottom: 1px solid #e5e9eb;
+      padding-bottom: 5px;
+      display: flex;
+
+      & .antialiased-icon {
+        font-smooth: always;
+        --webkit-font-smoothing: antialiased;
+      }
+
+      & div {
+        position: relative;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          border-radius: 3px;
+          opacity: 0.6;
+          transition: all 0.3s;
+        }
+
+        &::after {
+          content: "";
+          transition: all 0.3s;
+          position: absolute;
+          width: 0%;
+          height: 4px;
+          bottom: -7px;
+          left: 0;
+          background-color: black;
+          border-radius: 50px;
+          transition: all 0.3s;
+        }
+      }
+    }
+
+    & .TableContent {
+      height: 75vh;
+      overflow: scroll;
+      gap: 20px;
+      scrollbar-width: thin;
+      scrollbar-color: #555555 #888888;
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #555555;
+      }
+
+      &::-webkit-scrollbar {
+        width: 7px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      &::-webkit-scrollbar-track-piece {
+        margin-top: 55px;
+        margin-bottom: 5px;
+      }
+
+      & p {
+        color: #84919a;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      & #id_col {
+        width: 18%;
+      }
+
+      & #name_col {
+        width: 10%;
+      }
+
+      & #email_col {
+        width: 28%;
+      }
+
+      & #password_col {
+        width: 12%;
+      }
+
+      & #date_col {
+        width: 16%;
+      }
+
+      .table_titles {
+        display: flex;
+        align-items: center;
+        background-color: #f5f9fd;
+        padding: 10px 20px;
+        margin-right: 7px;
+        border-radius: 8px;
+        user-select: none;
+
+        & div {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+        & input {
+          cursor: pointer;
+        }
+
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      & .no-results {
+        color: rgb(105, 31, 31);
+        padding: 10px 20px;
+        transition: all 0.1s;
+        margin-right: 5px;
+      }
+
+      & .table_data {
+        padding: 10px 20px;
+        transition: all 0.1s;
+        margin-right: 5px;
+        cursor: pointer;
+
+        &:hover {
+          border-radius: 8px;
+          background-color: #f5f9fd;
+        }
+      }
+    }
+  }
+
+  & > :last-child {
+    margin-bottom: -55px;
+  }
+}

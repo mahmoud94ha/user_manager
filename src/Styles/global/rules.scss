@@ -1,0 +1,448 @@
+@import "../login/login.scss";
+
+:root {
+  --auth-background-color: 48px;
+  --auth-console-background-color: #141724;
+  --auth-horizontal-gutter: 48px;
+  --auth-horizontal-gutter-double: calc(96px * 2);
+  --auth-vertical-gutter: 48px;
+  --auth-navigation-height: calc(128px + 16px);
+  --auth-navigation-horizontal-gutter: 24px;
+  --auth-navigation-vertical-gutter: 16px;
+  --auth-title-font-size: 24px;
+  --auth-scrollbar-width: 20px;
+}
+
+@media screen and (min-width: 496px) {
+  :root {
+    --auth-horizontal-gutter: 48px;
+    --auth-horizontal-gutter-double: calc(48px * 2);
+    --auth-navigation-height: calc(64px + 8px);
+    --auth-title-font-size: 24px;
+    --auth-scrollbar-width: 20px;
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+.col_inp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & input {
+    width: 100%;
+    height: 48px;
+    color: #fff;
+    border: 2px solid #62626f;
+    outline: unset !important;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 16px;
+
+    &::placeholder {
+      color: #464d5e;
+    }
+  }
+  & textarea {
+    width: 100%;
+    height: 48px;
+    color: #fff;
+    border: 2px solid #62626f;
+    outline: unset !important;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 16px;
+
+    &::placeholder {
+      color: #464d5e;
+    }
+  }
+}
+
+.ac {
+  align-items: center;
+}
+
+.inp_grey {
+  & input {
+    background-color: #141724 !important;
+  }
+}
+
+body {
+  min-height: unset !important;
+  overflow: hidden !important;
+}
+
+.center {
+  text-align: center;
+}
+
+label:not([for="remember"]) {
+  color: white;
+  text-transform: uppercase;
+  font-size: 11px !important;
+}
+
+.fl_row {
+  display: flex;
+}
+
+.fl_col {
+  display: flex;
+  flex-direction: column;
+}
+
+.ai_c {
+  align-items: center;
+}
+
+.jc_s {
+  justify-content: space-between;
+}
+
+.jc_c {
+  justify-content: center;
+}
+
+.remember-me {
+  font-weight: 500 !important;
+  font-family: $secondary-font;
+  letter-spacing: 0.03em;
+  line-height: 1.129;
+}
+
+button {
+  width: 96%;
+  border: 0;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0 auto;
+  transform: scale(1.05);
+
+  &:not(:disabled):hover {
+    transform: scale(1);
+  }
+
+  &:disabled {
+    background-color: #253b77;
+    color: #777984 !important;
+    cursor: default;
+    transition: none;
+    animation: none;
+    transform: scale(1.05);
+  }
+}
+
+.btn-bleu {
+  background-color: #235fe3;
+  color: $white;
+  padding: 12px 24px;
+
+  &:not(:disabled):hover {
+    background-color: #1f55ca;
+    box-shadow: 0 0 30px rgba(39, 106, 252, 0.2);
+  }
+}
+
+.btn-bleu-light {
+  border: 2px solid #235fe3;
+  background-color: rgba(23, 26, 41, 0.7);
+  color: $white;
+  padding: 12px 24px;
+
+  &:hover {
+    box-shadow: 0 0 30px rgba(39, 106, 252, 0.2);
+  }
+}
+
+a {
+  color: #5288fd;
+  text-decoration: none;
+  font-size: 16px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+//reponsive
+@media (max-width: 992px) {
+  .LogiForm {
+    padding: 0 20px;
+  }
+}
+
+// browser autofill rules
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px #141724 inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover {
+  box-shadow: 0 0 0 1000px #141724 inset !important;
+  -webkit-text-fill-color: #908e97 !important;
+}
+
+.countrySvgs {
+  position: absolute !important;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 77vh;
+}
+
+.loader {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 14ch;
+}
+
+.itembanned {
+  div {
+    p {
+      color: #e3e2e2 !important;
+    }
+  }
+}
+
+// << START DARK THEME >> //
+.dark-theme {
+  #AdminAssignTable .Table .TableHeader div::after,
+  #AccountsTable .Table .TableHeader div::after {
+    background-color: #fff !important;
+  }
+  .CurrentDataPreview {
+    .MuiContainer-root {
+      div {
+        background-color: #141724 !important;
+      }
+    }
+
+    .MuiTypography-root {
+      position: relative;
+      z-index: 999;
+    }
+  }
+
+  .settings input {
+    border: 2px solid #51459e;
+  }
+
+  .itembanned {
+    div {
+      p {
+        color: #e5e3e3 !important;
+      }
+    }
+  }
+
+  .dashboard_nav .navList {
+    svg {
+      path {
+        filter: invert(1);
+      }
+    }
+  }
+
+  .dashboard_nav,
+  .dashboard_data,
+  .table_titles,
+  .adminMenu {
+    background-color: #141724 !important;
+    color: #fff !important;
+    div:not(
+        .search__,
+        .Toastify,
+        .Toastify__toast,
+        .Toastify__toast-container,
+        :is(.Toastify__toast-container *)
+      ) {
+      color: #fff !important;
+    }
+    input:not([type="checkbox"]) {
+      background-color: #141724 !important;
+      color: #fff !important;
+    }
+  }
+
+  .table_titles .fl_row .ai_c {
+    background-color: #0d0713 !important;
+  }
+  #AccountsTable .Table .TableContent .table_titles,
+  #AdminAssignTable .Table .TableContent .table_titles {
+    background-color: #0d0713 !important;
+  }
+
+  #AdminAssignTable .Table .TableHeader {
+    background-color: #141724 !important;
+  }
+  #AdminAssignTable .ToolsBar .SearchTable,
+  #AccountsTable .ToolsBar .SearchTable,
+  .Export {
+    svg {
+      path {
+        fill: #fff !important;
+      }
+    }
+    background: #0d0713 !important;
+  }
+
+  #AccountsTable .Table .TableContent .table_data:hover,
+  #AdminAssignTable .Table .TableContent .table_data:hover {
+    background-color: #23232e;
+  }
+
+  div {
+    &.navItem:hover {
+      background-color: #141313 !important;
+    }
+  }
+
+  .adminAccount {
+    .dark_themed {
+      path {
+        fill: #fff !important;
+      }
+    }
+  }
+
+  .dark_theme_circle {
+    stroke: #fff !important;
+  }
+
+  .dotsicon_black {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    stroke-width: 2px !important;
+  }
+
+  // div:not(.search__,.Toastify),
+  // input {
+  //   background-color: #141724 !important;
+  //   color: #fff !important;
+  // }
+}
+
+.dark-theme-content {
+  background: #141724 !important;
+
+  #AdminAssignTable .Table .TableHeader div::after,
+  #AccountsTable .Table .TableHeader div::after {
+    background-color: #fff !important;
+  }
+
+  .dashboard_nav,
+  .dashboard_data,
+  .table_titles,
+  .PopupContent {
+    background-color: #141724 !important;
+    color: #fff !important;
+    div:not(
+        .search__,
+        .Toastify,
+        .Toastify__toast,
+        .Toastify__toast-container,
+        :is(.Toastify__toast-container *)
+      ) {
+      color: #fff !important;
+    }
+    input:not([type="checkbox"]) {
+      background-color: #141724 !important;
+      color: #fff !important;
+    }
+  }
+
+  #generateAccountTable .ToolsBar .SearchTable {
+    svg {
+      path {
+        fill: #fff !important;
+      }
+    }
+    background: #0d0713 !important;
+  }
+
+  #AccountsTable .Table .TableContent .table_data:hover,
+  #AdminAssignTable .Table .TableContent .table_data:hover,
+  #generateAccountTable .Table .TableContent .table_data:hover {
+    background-color: #23232e;
+  }
+  #AdminAssignTable .ToolsBar .SearchTable,
+  #AccountsTable .ToolsBar .SearchTable,
+  .Export {
+    svg {
+      path {
+        fill: #fff !important;
+      }
+    }
+    background: #0d0713 !important;
+  }
+  #AccountsTable .Table .TableContent .table_titles,
+  #AdminAssignTable .Table .TableContent .table_titles,
+  #generateAccountTable .Table .TableContent .table_titles {
+    background-color: #0d0713 !important;
+  }
+
+  .itembanned {
+    div {
+      p {
+        color: #e5e3e3 !important;
+      }
+    }
+  }
+}
+
+.WebkitScroll {
+  &::-webkit-scrollbar-thumb {
+    background-color: #555555;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    margin-top: 55px;
+    margin-bottom: 5px;
+  }
+}
