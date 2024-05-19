@@ -2,15 +2,21 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function useClientIP() {
-    async function getIp() {
-        try {
-            const response = await axios.get('https://httpbin.org/ip');
-            const ip = response.data.origin;
-            return ip;
-        } catch (error) {
-            console.error('Error fetching IP:', error);
-            return null;
-        }
-    }
-    getIp()
+    const [clientIP, setClientIP] = useState(null);
+
+    useEffect(() => {
+        const fetchIP = async () => {
+            try {
+                const response = await axios.get('https://httpbin.org/ip');
+                setClientIP(response.data.origin);
+            } catch (error) {
+                console.error('Error fetching IP:', error);
+                setClientIP(null);
+            }
+        };
+
+        fetchIP();
+    }, []);
+
+    return btoa(clientIP);
 }
