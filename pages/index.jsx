@@ -4,8 +4,8 @@ import { makeApiCall } from "@lib/visitor";
 import Head from "next/head";
 import { setup } from "@lib/CustomCSRF";
 
-function Home() {
-  const clientIP = useClientIP();
+async function Home() {
+  const clientIP = await useClientIP();
 
   useEffect(() => {
     if (clientIP) {

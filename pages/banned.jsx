@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import useClientIP from '@lib/useClientIP';
 import axios from "axios";
 
-const BannedPage = () => {
-    const clientIP = useClientIP();
+const BannedPage = async () => {
+    const clientIP = await useClientIP();
     const [render, setRender] = useState(false);
     useEffect(async () => {
         try {

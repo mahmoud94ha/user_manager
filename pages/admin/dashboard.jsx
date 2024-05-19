@@ -8,9 +8,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-function Dashboard() {
+async function Dashboard() {
   const { data: session, status } = useSession();
-  const clientIP = useClientIP();
+  const clientIP = await useClientIP();
   const [dashboardVisible, setDashboardVisible] = useState(false);
   const [emailInput, setEmailInput] = useState("");
   const [secret, setSecret] = useState("");

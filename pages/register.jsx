@@ -7,8 +7,8 @@ import { setup } from "@lib/CustomCSRF";
 
 // import LoadingAnimation from "../components/LoadingAnimation/animation";
 
-function RegisterPage() {
-  const clientIP = useClientIP();
+async function RegisterPage() {
+  const clientIP = await useClientIP();
   const [currentPage, setCurrentPage] = useState("register");
   const session = getSession();
   // const [isLoading, setIsLoading] = useState(false);
