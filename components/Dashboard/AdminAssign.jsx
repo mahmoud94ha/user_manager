@@ -9,6 +9,7 @@ import { faCheck, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import { faTimes, faUserTimes } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import SearchIcon from "../UI/icons/search";
+import ChatComp from "./chat";
 import DeleteIcon from "../UI/icons/delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,6 +36,7 @@ export default function AdminAssign({
   const [searchQuery, setSearchQuery] = useState("");
   const [toolsVisibility, setToolsVisibility] = useState({});
   const [banPopupVisibility, setBanPopupVisibility] = useState({});
+  const [chatPopupVisibility, setchatPopupVisibility] = useState({});
   const [tableContentClassName, setTableContentClassName] = useState("fade-in");
   const toolsRef = useRef(null);
   const [userCount, setUserCount] = useState(0);
@@ -65,13 +67,13 @@ export default function AdminAssign({
     }
   }, []);
 
-    const handleTabClick = (tab) => {
-      setTableContentClassName("fade-out");
-      setTimeout(() => {
-        setActiveTab(tab);
-        setTableContentClassName("fade-in");
-      }, 100);
-    };
+  const handleTabClick = (tab) => {
+    setTableContentClassName("fade-out");
+    setTimeout(() => {
+      setActiveTab(tab);
+      setTableContentClassName("fade-in");
+    }, 100);
+  };
 
   const handleCheckboxClick = (rowId) => {
     setSelectAll(false);
@@ -197,6 +199,7 @@ export default function AdminAssign({
     if (isOutside) {
       setToolsVisibility({});
       setBanPopupVisibility({});
+      setchatPopupVisibility({});
     }
   };
 
@@ -223,6 +226,20 @@ export default function AdminAssign({
         setToolsVisibility({});
       }
 
+      return updatedVisibility;
+    });
+  };
+
+  const handleToggleChatPopup = (rowId) => {
+    setchatPopupVisibility((prevVisibility) => {
+      const updatedVisibility = {};
+      updatedVisibility[rowId] = !prevVisibility[rowId];
+
+      if (updatedVisibility[rowId]) {
+      } else {
+        setSelectedData([]);
+        setToolsVisibility({});
+      }
       return updatedVisibility;
     });
   };
@@ -503,6 +520,30 @@ export default function AdminAssign({
                       unmountOnExit
                     >
                       <div className="tools">
+
+                        <div>
+                          <p onClick={() => handleToggleChatPopup(item.id)}>
+                            Message
+                          </p>
+                          <Popup
+                            closeOnDocumentClick={false}
+                            trigger={null}
+                            position="left center"
+                            contentStyle={{
+                              width: "50vw",
+                              height: "800px",
+                              position: "fixed",
+                              backgroundColor: "orange !important",
+                              left: "25%",
+                              top: "15%",
+                              transform: "translate(-50%, -50%)",
+                            }}
+                            onClose={() => handleToggleChatPopup(item.id)}
+                            open={chatPopupVisibility[item.id]}
+                          >
+                            <ChatComp userId={item.id} userName={item.name} />
+                          </Popup>
+                        </div>
                         <div>
                           <p onClick={() => handleToggleBanPopup(item.id)}>
                             Remove

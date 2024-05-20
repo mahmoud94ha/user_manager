@@ -19,7 +19,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
                 return;
             }
 
-            const ticket = await prisma.supportRequest.findMany({ where: { accountEmail: accountEmail } })
+            const ticket = await prisma.supportRequest.findUnique({ where: { accountEmail: accountEmail } })
 
             if (ticket) {
                 res.status(400).json({ error: "You already have an open support ticket." });

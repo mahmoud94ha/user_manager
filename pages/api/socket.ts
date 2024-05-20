@@ -1,33 +1,57 @@
-import { Server } from 'socket.io';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { Server as SocketIOServer } from 'socket.io';
 import prisma from '@lib/prisma';
 
-export default function handler(req, res) {
-    if (res.socket.server.io) {
-        res.end();
-        return;
-    }
+type NextApiResponseWithSocket = NextApiResponse & {
+    socket: {
+        server: {
+            io: SocketIOServer;
+        };
+    };
+};
 
-    const io = new Server(res.socket.server);
-    res.socket.server.io = io;
+const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
+    if (!res.socket.server.io) {
+        console.log('*First use, starting Socket.IO');
+        const io = new SocketIOServer(res.socket.server as any);
 
-    io.on('connection', socket => {
-        socket.on('sendMessage', async (message) => {
-            const savedMessage = await prisma.message.create({
-                data: {
-                    content: message.content,
-                    senderId: message.senderId,
-                    receiverId: message.receiverId
+        io.on('connection', (socket) => {
+            console.log(`Socket ${socket.id} connected.`);
+
+            socket.on('send-message', async (obj) => {
+                try {
+                    const savedMessage = await prisma.message.create({
+                        data: {
+                            content: obj.content,
+                            senderId: obj.senderId,
+                            senderName: obj.senderName,
+                            receiverName: obj.receiverName,
+                            receiverId: obj.receiverId,
+                        },
+                    });
+                    io.emit('receive-message', savedMessage);
+                } catch (error) {
+                    console.error('Error saving message:', error);
                 }
             });
-            io.emit('message', savedMessage);
-        });
-    });
 
+            socket.on('disconnect', () => {
+                console.log(`Socket ${socket.id} disconnected.`);
+            });
+        });
+
+        res.socket.server.io = io;
+        console.log('Setting up socket');
+    } else {
+        console.log('Socket.IO already set up');
+    }
     res.end();
-}
+};
+
+export default SocketHandler;
 
 export const config = {
     api: {
-        bodyParser: false
-    }
+        bodyParser: false,
+    },
 };

@@ -6,7 +6,7 @@
       "@prismaAuthClient": ["./prisma/generated/auth-client"],
       "@lib/*": ["./lib/*"],
       "@UI/*": ["./components/UI/*"],
-      "components": ["./components/*"],
+      "components": ["./components/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -20,7 +20,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "target": "es2015",
-    "downlevelIteration": true
+    "downlevelIteration": true,
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
