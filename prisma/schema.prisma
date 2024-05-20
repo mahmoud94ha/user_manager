@@ -9,10 +9,10 @@ datasource db {
 }
 
 model Visitor {
-  id            Int       @id @default(autoincrement())
-  ipAddress     String
-  lastPage      String
-  dateVisited   DateTime  @default(now())
+  id          Int      @id @default(autoincrement())
+  ipAddress   String
+  lastPage    String
+  dateVisited DateTime @default(now())
 
   @@unique([ipAddress, lastPage])
 }
@@ -45,33 +45,35 @@ model Session {
 }
 
 model User {
-  id            String              @id @default(cuid())
-  name          String?
-  email         String?             @unique
-  password      String
-  plainPassword String?
-  emailVerified DateTime?
-  image         String?
-  role          String?
-  accounts      Account[]
-  sessions      Session[]
-  createdAt     DateTime?           @default(now())
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  password         String
+  plainPassword    String?
+  emailVerified    DateTime?
+  image            String?
+  role             String?
+  accounts         Account[]
+  sessions         Session[]
+  createdAt        DateTime? @default(now())
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
 }
 
 model customers {
-  id          Int       @id @default(autoincrement())
-  username    String
-  email       String    @unique
-  password    String
-  ip          String?
-  location    String?
-  verified    Boolean?
-  online      Boolean?
-  banned      Boolean   @default(false)
-  banMessage  String?
-  by_user     String?
-  createdAt   DateTime  @default(now())
-  verifiedAt  DateTime?
+  id         Int       @id @default(autoincrement())
+  username   String
+  email      String    @unique
+  password   String
+  ip         String?
+  location   String?
+  verified   Boolean?
+  online     Boolean?
+  banned     Boolean   @default(false)
+  banMessage String?
+  by_user    String?
+  createdAt  DateTime  @default(now())
+  verifiedAt DateTime?
 }
 
 model VerificationToken {
@@ -93,25 +95,36 @@ model PasswordResetToken {
 }
 
 model BannedIP {
-  id          Int       @id @default(autoincrement())
-  ipAddress   String    @unique
+  id        Int    @id @default(autoincrement())
+  ipAddress String @unique
 }
 
 model SupportRequest {
-  id           Int      @id @default(autoincrement())
-  accountEmail String   @unique
-  subject      String
-  message      String
-  replyMessage String?
+  id            Int      @id @default(autoincrement())
+  accountEmail  String   @unique
+  subject       String
+  message       String
+  replyMessage  String?
   repliedByUser String?
-  createdAt    DateTime @default(now())
+  createdAt     DateTime @default(now())
 }
 
 model Settings {
-  id                 Int      @id @default(autoincrement())
-  autoBackupEnabled  Boolean  @default(false)
-  backupTimeout      Int?
-  summaryEnabled     Boolean  @default(false)
+  id                      Int     @id @default(autoincrement())
+  autoBackupEnabled       Boolean @default(false)
+  backupTimeout           Int?
+  summaryEnabled          Boolean @default(false)
   userNotificationEnabled Boolean @default(false)
-  notificationEmail String  @default("example@example.com")
+  notificationEmail       String  @default("example@example.com")
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  senderId   String
+  receiverId String
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
 }

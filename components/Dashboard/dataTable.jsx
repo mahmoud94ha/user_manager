@@ -853,7 +853,7 @@ function dataTable({
             <SearchIcon></SearchIcon>
             <input
               type="text"
-              placeholder={`Search Accounts (${DataCounts})`}
+              placeholder={`Search Customers (${DataCounts})`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />

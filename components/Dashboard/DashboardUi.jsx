@@ -27,11 +27,11 @@ import Head from "next/head";
 const tabs = [
   { id: "home", icon: <HomeIcon />, label: "Home", roles: ["user", "admin"] },
   {
-    id: "accounts",
+    id: "customers",
     icon: <UsersIcon />,
-    label: "Accounts",
+    label: "Customers",
     roles: ["user", "admin"],
-    headTitle: "Accounts - UM",
+    headTitle: "Customers - UM",
   },
   {
     id: "dash_users",
@@ -65,7 +65,7 @@ const tabs = [
 
 const tabComponents = {
   home: (props) => <Home {...props} />,
-  accounts: (props) => <AccountsList {...props} />,
+  customers: (props) => <AccountsList {...props} />,
   dash_users: (props) => <AdminAssign {...props} />,
   support_tickets: (props) => <SupportTickets {...props} />,
   settings: (props) => <Settings {...props} />,

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const useUserActivity = () => {
     useEffect(() => {
-        console.log("what");
+        // console.log("what");
         let isOnline = true;
         let timeoutId;
 

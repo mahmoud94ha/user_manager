@@ -102,7 +102,7 @@ function logstatus(status: string, ipAddress: string, useragent: string, method:
 }
 
 export async function middleware(request: NextRequest) {
-  const ipAddress = env.LOCAL === "true" ? "127.0.0.1" : request.headers.get("remoteAddr");
+  const ipAddress = env.LOCAL === "true" ? "127.0.0.1" : request.headers.get("remoteAddr"); // nginx remoteAddr ip adress
   const requestPath = request.nextUrl.pathname;
 
   const banned_ips_req = await fetch(`${env.NEXTAUTH_URL}/api/secure/bannedlist`, {
