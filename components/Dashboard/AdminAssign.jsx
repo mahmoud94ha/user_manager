@@ -485,7 +485,6 @@ export default function AdminAssign({
                     : "Offline"
                     }`}
                   key={item.id}
-                  onClick={() => handleCheckboxClick(item.id)}
                 >
                   <div id="checkbox">
                     <input
@@ -494,6 +493,7 @@ export default function AdminAssign({
                       id=""
                       onChange={() => { }}
                       checked={selectedRows[item.id] || false}
+                      onClick={() => handleCheckboxClick(item.id)}
                     />
                   </div>
                   <div

@@ -613,7 +613,6 @@ export default function SupportRequests() {
                                         borderRadius: item.replyMessage ? "8px" : "",
                                     }}
                                     key={item.id}
-                                    onClick={() => handleCheckboxClick(item.id)}
                                 >
                                     <div id="checkbox">
                                         <input
@@ -622,6 +621,7 @@ export default function SupportRequests() {
                                             id=""
                                             onChange={() => { }}
                                             checked={selectedRows[item.id] || false}
+                                            onClick={() => handleCheckboxClick(item.id)}
                                         />
                                     </div>
                                     <div
