@@ -555,31 +555,32 @@ export default function AdminAssign({
                       unmountOnExit
                     >
                       <div className="tools">
-
-                        <div>
-                          <p onClick={() => handleToggleChatPopup(item.id)}>
-                            Message
-                          </p>
-                          <Popup
-                            closeOnDocumentClick={false}
-                            trigger={null}
-                            position="left center"
-                            contentStyle={{
-                              width: "50vw",
-                              height: "800px",
-                              position: "fixed",
-                              backgroundColor: "orange !important",
-                              left: "25%",
-                              top: "10%",
-                              transform: "translate(-50%, -50%)",
-                              overflow: "hidden"
-                            }}
-                            onClose={() => handleToggleChatPopup(item.id)}
-                            open={chatPopupVisibility[item.id]}
-                          >
-                            <ChatComp userId={item.id} userName={item.name} online={item.online} />
-                          </Popup>
-                        </div>
+                        {item.role === "admin" && (
+                          <div>
+                            <p onClick={() => handleToggleChatPopup(item.id)}>
+                              Message
+                            </p>
+                            <Popup
+                              closeOnDocumentClick={false}
+                              trigger={null}
+                              position="left center"
+                              contentStyle={{
+                                width: "50vw",
+                                height: "800px",
+                                position: "fixed",
+                                backgroundColor: "white",
+                                left: "25%",
+                                top: "10%",
+                                transform: "translate(-50%, -50%)",
+                                overflow: "hidden"
+                              }}
+                              onClose={() => handleToggleChatPopup(item.id)}
+                              open={chatPopupVisibility[item.id]}
+                            >
+                              <ChatComp userId={item.id} userName={item.name} online={item.online} />
+                            </Popup>
+                          </div>
+                        )}
                         <div>
                           <p onClick={() => handleToggleBanPopup(item.id)}>
                             Remove
@@ -592,7 +593,7 @@ export default function AdminAssign({
                               width: "20vw",
                               height: "300px",
                               position: "fixed",
-                              backgroundColor: "orange !important",
+                              backgroundColor: "white !important",
                               left: "40%",
                               top: "30%",
                               transform: "translate(-50%, -50%)",
