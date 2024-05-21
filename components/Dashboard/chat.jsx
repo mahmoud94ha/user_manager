@@ -50,7 +50,12 @@ const Chat = ({ userId, userName, online }) => {
         });
 
         socket.on("receive-message", (data) => {
-            setAllMessages((prev) => [...prev, data]);
+            if (
+                (data.receiverId === session.user.id && data.senderId === userId) ||
+                (data.senderId === session.user.id && data.receiverId === userId)
+            ) {
+                setAllMessages((prev) => [...prev, data]);
+            }
         });
 
         socket.on("disconnect", () => {

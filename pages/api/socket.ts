@@ -15,12 +15,10 @@ const SocketHandler = async (req: NextApiRequest, res: NextApiResponseWithSocket
     if (!res.socket.server.io) {
         console.log('*First use, starting Socket.IO');
         const io = new SocketIOServer(res.socket.server as any);
+        const user = await withAuth(req, res, true);
 
-        io.on('connection', async (socket) => {
-            const user = await withAuth(req, res, true);
-            console.log(`Socket ${socket.id} connected for user ${user.id}.`);
-
-            socket.join(user.id);
+        io.on('connection', (socket) => {
+            console.log(`Socket ${socket.id} connected.`);
 
             socket.on('send-message', async (obj) => {
                 try {
@@ -34,7 +32,7 @@ const SocketHandler = async (req: NextApiRequest, res: NextApiResponseWithSocket
                         },
                     });
 
-                    io.to(obj.senderId).to(obj.receiverId).emit('receive-message', savedMessage);
+                    io.emit('receive-message', savedMessage);
 
                 } catch (error) {
                     console.error('Error saving message:', error);
@@ -42,7 +40,7 @@ const SocketHandler = async (req: NextApiRequest, res: NextApiResponseWithSocket
             });
 
             socket.on('disconnect', () => {
-                console.log(`Socket ${socket.id} disconnected for user ${user.id}.`);
+                console.log(`Socket ${socket.id} disconnected.`);
             });
         });
 
