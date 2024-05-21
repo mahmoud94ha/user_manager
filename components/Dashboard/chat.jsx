@@ -56,17 +56,6 @@ const Chat = ({ userId, userName, online }) => {
             ) {
                 setAllMessages((prev) => [...prev, data]);
             }
-            if (data.receiverId === session.user.id && data.senderId === userId) {
-                toast.info(`New message from ${data.senderName}: ${data.content}`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            }
         });
 
         socket.on("disconnect", () => {
