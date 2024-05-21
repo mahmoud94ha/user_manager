@@ -1216,11 +1216,11 @@ function dataTable({
               )}
               <div
                 id="status"
-                className={activeColumn === "status" ? "active" : ""}
-                onClick={() => handleSort("status")}
+                className={activeColumn === "online" ? "active" : ""}
+                onClick={() => handleSort("online")}
               >
                 <p>Status</p>
-                {activeColumn === "status" && (
+                {activeColumn === "online" && (
                   <i
                     className={`icon-sort ${sortAscending ? "icon-sort-asc" : "icon-sort-desc"
                       }`}

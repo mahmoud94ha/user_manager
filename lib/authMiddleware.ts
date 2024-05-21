@@ -17,6 +17,7 @@ export const withAuth = async (req: NextApiRequest, res: NextApiResponse, allowU
                 email?: string | null;
                 image?: string | null;
                 role?: string | null;
+                id?: string | null;
             };
         };
 

@@ -2,8 +2,7 @@
   @font-face {
     font-family: "Electronic Arts Text";
     font-weight: normal;
-    src: url("../global/fonts/artxtextregular.woff2")
-      format("woff2");
+    src: url("../global/fonts/artxtextregular.woff2") format("woff2");
   }
 
   display: flex;
@@ -402,7 +401,7 @@
       }
 
       & #role_col {
-        width: 25%;
+        width: 15%;
       }
 
       & #id_col_sup {
@@ -410,7 +409,7 @@
       }
 
       & #email_col_sup {
-        width: 15%;
+        width: 25%;
       }
 
       & #subject_col {
@@ -421,6 +420,10 @@
       }
       & #date_col_sup {
         width: 35%;
+      }
+
+      & #col_status {
+        width: 20%;
       }
 
       .table_titles {
@@ -532,9 +535,23 @@
           }
         }
       }
+      & #col_status {
+        // width: 10%;
+
+        & p {
+          width: fit-content;
+          margin-right: 1px !important;
+          padding: 8px 0px;
+          border-radius: 20px;
+
+          &#table-value {
+            padding: 8px 20px !important;
+          }
+        }
+      }
 
       & .table_data.Online {
-        & #status {
+        & #col_status {
           & p {
             background-color: rgb(87, 211, 82);
             color: white;
@@ -543,7 +560,7 @@
       }
 
       & .table_data.Offline {
-        & #status {
+        & #col_status {
           & p {
             background-color: rgb(241, 77, 91);
             color: white;

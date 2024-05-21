@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server as SocketIOServer } from 'socket.io';
+import { withAuth } from '@lib/authMiddleware';
 import prisma from '@lib/prisma';
 
 type NextApiResponseWithSocket = NextApiResponse & {
@@ -10,13 +11,16 @@ type NextApiResponseWithSocket = NextApiResponse & {
     };
 };
 
-const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
+const SocketHandler = async (req: NextApiRequest, res: NextApiResponseWithSocket) => {
     if (!res.socket.server.io) {
         console.log('*First use, starting Socket.IO');
         const io = new SocketIOServer(res.socket.server as any);
 
-        io.on('connection', (socket) => {
-            console.log(`Socket ${socket.id} connected.`);
+        io.on('connection', async (socket) => {
+            const user = await withAuth(req, res, true);
+            console.log(`Socket ${socket.id} connected for user ${user.id}.`);
+
+            socket.join(user.id);
 
             socket.on('send-message', async (obj) => {
                 try {
@@ -29,14 +33,16 @@ const SocketHandler = (req: NextApiRequest, res: NextApiResponseWithSocket) => {
                             receiverId: obj.receiverId,
                         },
                     });
-                    io.emit('receive-message', savedMessage);
+
+                    io.to(obj.senderId).to(obj.receiverId).emit('receive-message', savedMessage);
+
                 } catch (error) {
                     console.error('Error saving message:', error);
                 }
             });
 
             socket.on('disconnect', () => {
-                console.log(`Socket ${socket.id} disconnected.`);
+                console.log(`Socket ${socket.id} disconnected for user ${user.id}.`);
             });
         });
 

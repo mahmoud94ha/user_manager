@@ -34,6 +34,7 @@ const getUser = async (req: NextApiRequest, res: NextApiResponse) => {
         image: user.image,
         role: user.role,
         createdAt: user.createdAt,
+        online: user.online,
       }));
 
       return res.status(200).json(finalUser);

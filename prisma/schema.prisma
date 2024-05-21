@@ -51,6 +51,7 @@ model User {
   password         String
   plainPassword    String?
   emailVerified    DateTime?
+  online           Boolean?
   image            String?
   role             String?
   accounts         Account[]

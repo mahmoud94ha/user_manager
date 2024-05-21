@@ -4,19 +4,32 @@ import prisma from '@lib/prisma';
 
 const getMessages = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const user: any = await withAuth(req, res, true);
-        const userId = req.query.userId || user.id;
+        const { recipientId } = req.query;
+        const user = await withAuth(req, res, true);
+        const userId = user.id;
+
         const messages = await prisma.message.findMany({
             where: {
                 OR: [
-                    { senderId: userId },
-                    { receiverId: userId }
+                    {
+                        AND: [
+                            { senderId: userId },
+                            { receiverId: recipientId as string }
+                        ]
+                    },
+                    {
+                        AND: [
+                            { senderId: recipientId as string },
+                            { receiverId: userId }
+                        ]
+                    }
                 ]
             },
             orderBy: {
                 createdAt: 'asc',
             },
         });
+
         res.status(200).json(messages);
     } catch (error) {
         console.error('Error fetching messages:', error);

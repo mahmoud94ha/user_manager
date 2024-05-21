@@ -165,9 +165,15 @@ export default function AdminAssign({
           bValue = bValue.toLowerCase();
         }
 
-        if (aValue < bValue) return sortAscending ? -1 : 1;
-        if (aValue > bValue) return sortAscending ? 1 : -1;
-
+        if (activeColumn === "status") {
+          const valueA = aValue ? 1 : 0;
+          const valueB = bValue ? 1 : 0;
+          if (valueA > valueB) return sortAscending ? -1 : 1;
+          if (valueA < valueB) return sortAscending ? 1 : -1;
+        } else {
+          if (aValue < bValue) return sortAscending ? -1 : 1;
+          if (aValue > bValue) return sortAscending ? 1 : -1;
+        }
         return 0;
       });
     }
@@ -246,10 +252,10 @@ export default function AdminAssign({
 
   const getFilteredTableData = () => {
     switch (activeTab) {
-      case "noAccounts":
-        return sortedTableData.filter((item) => 0 === 0);
-      case "haveAccounts":
-        return sortedTableData.filter((item) => 0 > 0);
+      // case "noAccounts":
+      //   return sortedTableData.filter((item) => 0 === 0);
+      // case "haveAccounts":
+      //   return sortedTableData.filter((item) => 0 > 0);
       case "all":
       default:
         return sortedTableData.filter((item) =>
@@ -419,7 +425,7 @@ export default function AdminAssign({
                 ></i>
               )}
             </div>
-            <div id="email_col" onClick={() => handleSort("email")}>
+            <div id="email_col_sup" onClick={() => handleSort("email")}>
               <p>Email</p>
               {activeColumn === "email" && (
                 <i
@@ -446,6 +452,19 @@ export default function AdminAssign({
                 ></i>
               )}
             </div>
+            <div
+              id="col_status"
+              className={activeColumn === "online" ? "active" : ""}
+              onClick={() => handleSort("online")}
+            >
+              <p>Status</p>
+              {activeColumn === "online" && (
+                <i
+                  className={`icon-sort ${sortAscending ? "icon-sort-asc" : "icon-sort-desc"
+                    }`}
+                ></i>
+              )}
+            </div>
           </div>
           {filteredTableData.length === 0 ? (
             <p
@@ -457,7 +476,10 @@ export default function AdminAssign({
             filteredTableData.map((item) => {
               return (
                 <div
-                  className="table_data fl_row ai_c"
+                  className={`table_data fl_row ai_c ${item.online
+                    ? "Online"
+                    : "Offline"
+                    }`}
                   key={item.id}
                   onClick={() => handleCheckboxClick(item.id)}
                 >
@@ -485,7 +507,7 @@ export default function AdminAssign({
                     <p>{item.name}</p>
                   </div>
                   <div
-                    id="email_col"
+                    id="email_col_sup"
                     onClick={() => handleCopyToClipboard(item.email)}
                   >
                     <p className="truncate" style={{ maxWidth: "35ch" }}>
@@ -505,6 +527,15 @@ export default function AdminAssign({
                     onClick={() => handleCopyToClipboard(item.role)}
                   >
                     <p>{item.role}</p>
+                  </div>
+                  <div
+                    id="col_status"
+                  >
+                    <p id="table-value">
+                      {item.online
+                        ? "Online"
+                        : "Offline"}
+                    </p>
                   </div>
                   <div className="userOptions" ref={toolsRef}>
                     <div
@@ -535,13 +566,14 @@ export default function AdminAssign({
                               position: "fixed",
                               backgroundColor: "orange !important",
                               left: "25%",
-                              top: "15%",
+                              top: "10%",
                               transform: "translate(-50%, -50%)",
+                              overflow: "hidden"
                             }}
                             onClose={() => handleToggleChatPopup(item.id)}
                             open={chatPopupVisibility[item.id]}
                           >
-                            <ChatComp userId={item.id} userName={item.name} />
+                            <ChatComp userId={item.id} userName={item.name} online={item.online} />
                           </Popup>
                         </div>
                         <div>

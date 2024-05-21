@@ -14,16 +14,6 @@ body {
   background-color: $primary;
 }
 
-.EaLogo {
-  width: 64px !important;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  filter: invert(100%);
-}
-
 .hoverable {
   background-color: #d1d0d5;
   border-radius: 5px;
@@ -178,34 +168,6 @@ body {
       border: 1px solid #686874;
       box-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
       transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    & #phoneNumber {
-      font-family: "Electronic Arts Text";
-      background-color: transparent !important;
-      border: 0 !important;
-      outline: unset !important;
-      box-shadow: unset !important;
-      padding-left: 35px;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0 1000px #141724 inset !important;
-        -webkit-text-fill-color: #fff !important;
-      }
-
-      &:-webkit-autofill:focus,
-      &:-webkit-autofill:hover {
-        box-shadow: 0 0 0 1000px #141724 inset !important;
-        -webkit-text-fill-color: #908e97 !important;
-      }
-
-      &:focus {
-        // doesnt work, i did this using useeffect is phoneinput.jsx
-        .countrySelect {
-          border-color: #fdfdfd !important;
-          box-shadow: 0 0 7px rgba(255, 255, 255, 0.3) !important;
-        }
-      }
     }
 
     input:hover:not(:focus):not([type="checkbox"]) {
