@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 import Tooltip from "@mui/material/Tooltip";
 import { useRouter } from "next/router";
 import { CSSTransition } from "react-transition-group";
@@ -23,6 +24,8 @@ import NavigationItem from "./NavigationItem";
 import GenerateAccount from "./GenerateAccounts";
 import GenerateUserIcon from "../UI/icons/generateUserIcon";
 import Head from "next/head";
+
+let socket;
 
 const tabs = [
   { id: "home", icon: <HomeIcon />, label: "Home", roles: ["user", "admin"] },
@@ -75,11 +78,58 @@ const tabComponents = {
 function DashboardUi() {
   const router = useRouter();
   const { data: session } = useSession();
+  const [notiSenderID, setnotiSenderID] = useState(null);
   const [activeTab, MainSetActiveTab] = useState("home");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [DarkModeToggle, setDarkModeToggle] = useState(null);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [searchUserId, setSearchUserId] = useState(null);
+
+  useEffect(() => {
+    socketInitializer();
+
+    return () => {
+      if (socket) {
+        socket.disconnect();
+      }
+    };
+  }, [session]);
+
+
+  async function socketInitializer() {
+    await fetch("/api/socket");
+    socket = io();
+
+    socket.on("connect", () => {
+      console.log("Connected to socket server");
+      if (session?.user?.id) {
+        socket.emit("join-room", session.user.id);
+      }
+    });
+
+    socket.on("receive-message", (data) => {
+      if (data.receiverId === session.user.id) {
+        const truncatedContent = data.content.length > 15 ? `${data.content.substring(0, 15)}...` : data.content;
+        toast.info(`New message from ${data.senderName}: ${truncatedContent}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          onClick: () => {
+            MainSetActiveTab("dash_users");
+            setnotiSenderID(data.senderId);
+        }
+        });
+      }
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from socket server");
+    });
+  }
 
   useEffect(() => {
     const selectedTabId = router.query.tab;
@@ -208,6 +258,8 @@ function DashboardUi() {
               setSearchUserId,
               MainSetActiveTab,
               isDarkMode,
+              notiSenderID,
+              setnotiSenderID
             })}
           </div>
           <ToastContainer autoClose={700} />

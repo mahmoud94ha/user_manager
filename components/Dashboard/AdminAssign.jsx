@@ -23,6 +23,8 @@ export default function AdminAssign({
   searchUserId,
   setSearchUserId,
   isDarkMode,
+  notiSenderID,
+  setnotiSenderID
 }) {
   const { data: session } = useSession();
   const [activeColumn, setActiveColumn] = useState(null);
@@ -183,7 +185,9 @@ export default function AdminAssign({
   const sortedTableData = getSortedData();
 
   const handleToggleTools = (rowId, event) => {
-    event.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
 
     setToolsVisibility((prevVisibility) => {
       const updatedVisibility = {};
