@@ -10,83 +10,6 @@ export const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
-const blockedUserAgents = [
-  "bot",
-  "inspect",
-  "inspection",
-  "mediapartner",
-  "verifi",
-  "feedfetcher",
-  "crawl",
-  "producer",
-  "favicon",
-  "googleother",
-  "extended",
-  "api",
-  "duplex",
-  "aloud",
-  "censys",
-  "curl",
-  "zgrab",
-  "urllib",
-  "libwww",
-  "siteexplorer",
-  "it2media",
-  "coccoc",
-  "barkrowler",
-  "spider",
-  "masscan",
-  "windows-update-agent",
-  "x11",
-  "scaninfo",
-  "android 4",
-  "iphone os 13",
-  "measurement",
-  "python-requests",
-  "dalvik",
-  "intel mac os x 10_11",
-  "winnt4.0",
-  "windows nt 6",
-  "mise 6",
-  "mra58k",
-  "facebookexternalhit",
-  "simplepie",
-  "yahooseeker",
-  "embedly",
-  "quora link preview",
-  "outbrain",
-  "vkshare",
-  "monit",
-  "pingability",
-  "monitoring",
-  "winhttprequest",
-  "apache-httpclient",
-  "getprismatic.com",
-  "twurly",
-  "yandex",
-  "browserproxy",
-  "crawler",
-  "qwantify",
-  "yahoo! slurp",
-  "pinterest",
-  "tumblr/14.0.835.186",
-  "tumblr agent 14.0",
-  "whatsapp",
-  "google-structured-data-testing-tool",
-  "google-inspectiontool",
-  "gptbot",
-  "applebot",
-  "python-",
-  "scans",
-  "symbian",
-  "fasthttp",
-  "facebook"
-];
-
-const allowedUserAgents = [
-  "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)",
-];
-
 function logstatus(status: string, ipAddress: string, useragent: string, method: string, path: string) {
   let coloredStatus: any;
   if (status === "Blocked") {
@@ -125,10 +48,6 @@ export async function middleware(request: NextRequest) {
   const { isBot, ua } = userAgent(request);
   const isbotPackage = isbot(ua);
   const isShortUserAgent = ua && ua.length < 20;
-  const myIsBot = blockedUserAgents.some((agent) =>
-    ua?.toLowerCase().includes(agent)
-  );
-
   const response = NextResponse.next();
 
   response.headers.append(
@@ -146,7 +65,7 @@ export async function middleware(request: NextRequest) {
   response.headers.append("origin", corsHeaders["origin"]);
 
   if (requestPath.startsWith("/api")) {
-    if (!ua || myIsBot || isBot) {
+    if (!ua || isBot) {
       logstatus("Blocked", ipAddress, ua || "N/A", request.method, requestPath);
       return NextResponse.redirect("https://www.google.com/");
     } else {
@@ -155,12 +74,12 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  if (ua && allowedUserAgents.includes(ua)) {
+  if (ua) {
     logstatus("Allowed", ipAddress, ua || "N/A", request.method, requestPath);
     return response;
   }
 
-  if (!ua || !ipAddress || myIsBot || isBot || isbotPackage || isShortUserAgent) {
+  if (!ua || !ipAddress || isBot || isbotPackage || isShortUserAgent) {
     logstatus("Blocked", ipAddress, ua || "N/A", request.method, requestPath);
     return NextResponse.redirect("https://www.google.com/");
   } else {
