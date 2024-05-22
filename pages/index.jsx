@@ -3,7 +3,7 @@ import 'bulma/css/bulma.min.css';
 import { faker } from '@faker-js/faker';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useEffect, useState } from 'react';
-import styles from '../src/styles/forum.module.css';
+import styles from '../src/Styles/forum.module.css';
 import useClientIP from '@lib/useClientIP';
 import { makeApiCall } from "@lib/visitor";
 import { useSession, signOut } from "next-auth/react";
