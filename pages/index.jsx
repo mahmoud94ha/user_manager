@@ -31,11 +31,15 @@ export const getServerSideProps = async () => {
 export default function Home({ posts }) {
   const { data: session } = useSession();
   const [loggedin, setLoggedin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const clientIP = useClientIP();
 
   useEffect(() => {
     if (session?.user) {
       setLoggedin(true);
+    }
+    if (session?.user.role === "admin") {
+      setIsAdmin(true);
     }
   }, [session]);
 
@@ -105,14 +109,26 @@ export default function Home({ posts }) {
                         </p>
                       </>
                     ) : (
-                      <p className="control">
-                        <a className="button is-small" onClick={() => signOut({ callbackUrl: "/" })}>
-                          <span className="icon">
-                            <i className="fa fa-sign-out"></i>
-                          </span>
-                          <span>Logout</span>
-                        </a>
-                      </p>
+                      <>
+                        {isAdmin && (
+                          <p className="control">
+                            <a className="button is-small is-info" onClick={() => location.href = "/admin/dashboard"}>
+                              <span className="icon">
+                                <i className="fa fa-dashboard"></i>
+                              </span>
+                              <span>Dashboard</span>
+                            </a>
+                          </p>
+                        )}
+                        <p className="control">
+                          <a className="button is-small" onClick={() => signOut({ callbackUrl: "/" })}>
+                            <span className="icon">
+                              <i className="fa fa-sign-out"></i>
+                            </span>
+                            <span>Logout</span>
+                          </a>
+                        </p>
+                      </>
                     )}
                   </div>
                 </div>
