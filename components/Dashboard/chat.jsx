@@ -73,7 +73,7 @@ const Chat = ({ userId, userName, online }) => {
 
     async function fetchMessages() {
         if (!recipientId) return;
-        const res = await axios.get(`/api/admin/getMessages?recipientId=${recipientId}`);
+        const res = await axios.get(`/api/admin/getMessages/${recipientId}`);
         const messages = res.data;
         setAllMessages(messages);
     }
