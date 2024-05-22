@@ -9,14 +9,41 @@ import { makeApiCall } from "@lib/visitor";
 import { useSession, signOut } from "next-auth/react";
 
 const generateRandomPosts = (num) => {
-  return Array.from({ length: num }, (_, index) => ({
-    id: index,
-    title: faker.lorem.sentence(),
-    username: faker.internet.userName(),
-    avatar: faker.image.avatar(),
-    comments: faker.datatype.number({ min: 0, max: 100 }),
-    timeAgo: faker.date.recent().toISOString(),
-  }));
+  return Array.from({ length: num }, (_, index) => {
+    const randomTags = [
+      "tag is-primary is-medium",
+      "tag is-link is-medium",
+      "tag is-light is-danger is-medium",
+      "tag is-dark is-medium",
+      "tag is-success is-medium",
+      "tag is-warning is-medium",
+      "tag is-medium"
+    ];
+    const randomTagsTitle = [
+      "Dashboard",
+      "Customers",
+      "Authentication",
+      "Payments",
+      "Transfers",
+      "Balance",
+      "Question"
+    ];
+    const randomIndex = Math.floor(Math.random() * randomTags.length);
+    const randomDate = faker.date.recent();
+    const formattedTime = randomDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    const isRecently = Math.random() < 0.3;
+
+    return {
+      id: index,
+      title: faker.lorem.sentence(),
+      username: faker.internet.userName(),
+      avatar: faker.image.avatar(),
+      comments: faker.datatype.number({ min: 0, max: 100 }),
+      timeAgo: isRecently ? "replied recently" : formattedTime,
+      tag: randomTags[randomIndex],
+      tagtitle: randomTagsTitle[randomIndex]
+    };
+  });
 };
 
 export const getServerSideProps = async () => {
@@ -185,8 +212,8 @@ export default function Home({ posts }) {
                       <div className={`media-content ${styles.mediaContent}`}>
                         <div className="content">
                           <p>
-                            <a href="#">@{post.username}</a> replied recently &nbsp;
-                            <span className="tag">Question</span>
+                            <a href="#">@{post.username}</a> {post.timeAgo} &nbsp;
+                            <span className={post.tag}>{post.tagtitle}</span>
                           </p>
                         </div>
                       </div>
