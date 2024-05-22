@@ -212,6 +212,12 @@ export default function Home({ posts }) {
                       <span className="tag is-light">Mahmoud Hannani</span>
                     </div>
                   </div>
+                  <div className="control">
+                    <div className="tags has-addons">
+                      <a className="tag is-link" href="/support">Support</a>
+                      <span className="tag is-light">Support page</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
