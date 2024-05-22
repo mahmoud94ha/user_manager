@@ -82,9 +82,9 @@ export default function Home({ posts }) {
                 <a className={`navbar-item ${styles.navbarMenuItem}`} href="#">Home</a>
                 <a className={`navbar-item ${styles.navbarMenuItem}`} href="#">Landing</a>
                 <a className={`navbar-item ${styles.navbarMenuItem}`} href="#">Blog</a>
-                <a className={`navbar-item ${styles.navbarMenuItem}`} href="#">Album</a>
                 <a className={`navbar-item ${styles.navbarMenuItem}`} href="#">Search</a>
                 <a className={`navbar-item ${styles.navbarMenuItem}`} href="#">Tabs</a>
+                <a className={`navbar-item ${styles.navbarMenuItem}`} href="/support">Support</a>
               </div>
               <div className="navbar-end">
                 <div className="navbar-item">
