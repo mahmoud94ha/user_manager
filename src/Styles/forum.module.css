@@ -1,0 +1,67 @@
+.topNav {
+  border-top: 5px solid #3498db;
+}
+
+.topNavContainer {
+  border-bottom: 1px solid #e6eaee;
+}
+
+.mainContainer {
+  margin: 3rem 0;
+}
+
+.navbarMenuItem {
+  padding: 0 2rem;
+}
+
+.menu {
+  padding-top: 3rem;
+}
+
+.menuList {
+  line-height: 1.5;
+}
+
+.menuLabel {
+  padding-left: 10px;
+  font-weight: 700;
+}
+
+.buttonPrimaryAlt {
+  color: white;
+  background: linear-gradient(to bottom, #0072ff, #00c6ff);
+  font-weight: 700;
+  font-size: 14px;
+  height: 3rem;
+  line-height: 2.8;
+}
+
+.mediaLeft img {
+  border-radius: 50%;
+}
+
+.mediaContent p {
+  font-size: 14px;
+  line-height: 2.3;
+  font-weight: 700;
+  color: #8f99a3;
+}
+
+.post {
+  margin: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e6eaee;
+}
+
+.lastPost {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.menuListItem {
+  padding: 5px;
+}
+
+.menuList li {
+  margin-bottom: 10px;
+}

@@ -29,3 +29,40 @@
     text-align: center;
   }
 }
+
+:root {
+  --scrollbar-height: 10px;
+  --scrollbar-width: 10px;
+  --scrollbar-track-bg: #efefef;
+  --scrollbar-thumb-bg: #d5d5d5;
+  --scrollbar-thumb-hover-bg: #c4c4c4;
+}
+
+::-webkit-scrollbar {
+  height: var(--scrollbar-height);
+  width: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-bg);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-bg);
+}
+
+.body_form {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  background: #f2f6fa;
+}
+
+footer {
+  background-color: #f2f6fa !important;
+}

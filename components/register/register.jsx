@@ -153,7 +153,7 @@ function Register({ clientIP = null }) {
 
     useEffect(() => {
         if (clientIP) {
-            makeApiCall(clientIP, "login");
+            makeApiCall(clientIP, "register");
         }
     }, [clientIP]);
 
